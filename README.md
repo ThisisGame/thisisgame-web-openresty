@@ -122,21 +122,8 @@ sudo systemctl start openresty.service
 进入`app\md`目录添加图书
 
 ```bash
-#克隆仓库并且初始化、更新submodule
-git clone https://github.com/ThisisGame/cpp-game-engine-book.git --recursive
-```
-
-这个命令等同于下面的：
-
-```bash
+#克隆图书
 git clone https://github.com/ThisisGame/cpp-game-engine-book.git
-git submodule init && git submodule update
 ```
 
-后续要更新submodule，使用下面命令：
-
-```bash
-git submodule update
-```
-
-更新好之后，就可以访问教程内页了。
+克隆好之后，就可以访问教程内页了。
