@@ -1,0 +1,89 @@
+<!--navbar-expand-lg 去掉这个，菜单栏就会折叠起来，变成移动设备的样式-->
+		<nav class="navbar navbar-light navbar-expand-lg" style="background-color: #F5F5F5;">
+		  <a class="navbar-brand" href="/">{{SiteName}}</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+			  <li class="nav-item active">
+				<a class="nav-link" href="/">首页 <span class="sr-only">(current)</span></a>
+			  </li>
+			  <li class="nav-item dropdown">
+				<!--
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				  客户端
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin-top: -1px;">
+				  <a class="dropdown-item" href="#">Unity3d</a>
+				  <a class="dropdown-item" href="#">Laya</a>
+				  <a class="dropdown-item" href="#">Cocos</a>
+				  <div class="dropdown-divider"></div>
+				  <a class="dropdown-item" href="#">其他</a>
+				</div>
+			  </li>
+			  <li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				  服务端
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin-top: -1px;">
+				  <a class="dropdown-item" href="#">C++</a>
+				  <a class="dropdown-item" href="#">Lua</a>
+				  <div class="dropdown-divider"></div>
+				  <a class="dropdown-item" href="#">Skynet</a>
+				</div>
+			  </li>
+			  <li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				  网站开发
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin-top: -1px;">
+				  <a class="dropdown-item" href="#">PHP</a>
+				  <a class="dropdown-item" href="#">Mysql</a>
+				  <a class="dropdown-item" href="#">MongoDB</a>
+				</div>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">OpenGL</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">App开发</a>
+			  </li>
+			  <li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				  策划
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin-top: -1px;">
+				  <a class="dropdown-item" href="#">系统策划</a>
+				  <a class="dropdown-item" href="#">数值策划</a>
+				</div>
+			  </li>
+			  -->
+			  <li class="nav-item">
+				<a class="nav-link" href="https://github.com/ThisisGame/GameDevTools"  target="_blank" tabindex="-1" aria-disabled="true">GameDevTools</a>
+			  </li>
+			</ul>
+
+			<!--搜索条-->
+			<form class="form-inline my-2 my-lg-0">
+			  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+			  <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+			</form>
+
+			<div id="div_login_or_register">
+				<a href="/user/login.html">登陆</a> |
+				<a href="/user/register.html">注册</a>
+			</div>
+
+			<div id="div_userinfo" class="dropdown">
+			  <a id="a_userinfo" class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{UserName}}</a>
+
+			  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+			    <a class="dropdown-item" href="/user/my/{{UserName}}.html" target="_blank">个人中心</a>
+			    <div class="dropdown-divider"></div>
+			    <a class="dropdown-item" href="/user/logout.html">注销</a>
+			  </div>
+			</div>
+		  </div>
+		</nav>

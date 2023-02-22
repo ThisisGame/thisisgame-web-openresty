@@ -1,0 +1,15 @@
+<!--鼠标悬浮 显示子菜单-->
+	<script type="text/javascript">
+		$(function() {
+			$(".nav-item.dropdown").each(function(){     
+				console.log(2);
+				$(this).hover(function(){
+					$(this).find('.dropdown-menu').addClass('show')
+				},function(){
+					console.log('leave')
+					$(this).find('.dropdown-menu.show').removeClass('show')
+				});  
+			}); 
+
+		});
+	</script>

@@ -1,0 +1,16 @@
+<!--检查当前是否登录，如果没有登录，那么显示登录按钮。-->
+	<script type="text/javascript">
+		$(function() {
+			var accountStr=document.getElementById("a_userinfo").innerHTML
+			if(accountStr=="")//没有登录,显示登录注册，隐藏用户信息
+			{
+				$("#div_userinfo").hide()
+				$("#div_login_or_register").show()
+			}
+			else
+			{
+				$("#div_userinfo").show()
+				$("#div_login_or_register").hide()
+			}
+		});
+	</script>

@@ -1,0 +1,146 @@
+a {
+ color:#333;
+ text-decoration:none;
+ background-color:transparent;
+ font-size: 14px;
+}
+
+a:hover {
+ color:#0056b3;
+ text-decoration:none
+}
+
+.page-link {
+ position:relative;
+ display:block;
+ padding:.5rem .75rem;
+ margin-left:-1px;
+ line-height:1.25;
+ color:#666;
+ background-color:#fff;
+ border:1px solid #dee2e6
+}
+
+#navbarSupportedContent a {
+ font-size: 1rem;
+}
+
+
+.tutorial-project .project-name {
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.tutorial-project .project-name:before {
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 8px;
+    margin-bottom: 2px;
+    vertical-align: middle;
+    background-color: #fe6a00;
+}
+
+h3 {
+    display: block;
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+
+ol, ul {
+    list-style: none;
+}
+
+.fl {
+    float: left;
+}
+
+.tutorial-project .project-list {
+    margin-left: -16px;
+	padding-left: 0px;
+}
+
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+.tutorial-project .project-list-item:hover {
+    box-shadow: 0 3px 5px rgba(0,0,0,.3);
+}
+.tutorial-project .project-list-item {
+    display: block;
+    height: 94px;
+    margin-bottom: 24px;
+    padding: 15px;
+    background-color: #efefef;
+    border-radius: 4px;
+    -webkit-transition: box-shadow 0.24s;
+    transition: box-shadow 0.24s;
+}
+
+a:hover {
+    color: #fe6a00;
+}
+
+.tutorial-project .project-list-item .info {
+    margin-left: 84px;
+}
+
+.tutorial-project .project-list-item .info-title {
+    font-size: 15px;
+}
+.single-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tutorial-project .project-list-item .info-des {
+    height: 3em;
+    margin-top: 6px;
+    color: #666;
+}
+.double-ellipsis {
+    overflow: hidden;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+
+/* 屏幕尺寸>1300 */
+@media screen and (min-width: 1300px){
+    /* 教程图书卡片 */
+    .tutorial-project .project-list-item-wrap {
+        width: 318px;
+    }
+
+    /* 首页左侧的教程分类 */
+    .tutorial-classify{
+        display: block;
+    }
+}
+
+/* 屏幕尺寸<1300 */
+@media screen and (max-width: 1300px){
+    /* 教程图书卡片 */
+    .tutorial-project .project-list-item-wrap {
+        width: 400px;
+        padding: 0 16px;
+    }
+    
+    /* 首页左侧的教程分类 */
+    .tutorial-classify{
+        display: none;
+    }
+}

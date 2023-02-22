@@ -1,0 +1,68 @@
+{(public/head_1.html)}
+		<link rel="stylesheet" href="static/css/index.css" />
+		
+		<title>{{SiteName}} | {{Slogan}}</title>
+		<meta name="keywords" content="{{SiteKeywords}}">
+		<meta name="description" content="{{SiteDesc}}">
+{(public/head_2.html)}
+	<body>
+		<div class="container-fluid">
+
+			{(public/nav.html)}
+	
+			<br>
+			<div class="row">
+				<div class="col-md-2 tutorial-classify">
+					<div class="card" style="width: 11rem;">
+						<div class="card-header">
+							全部教程
+						</div>
+						<ul class="list-group list-group-flush">
+							{% for _,tutorialGroup in pairs(TutorialGroups) do %}
+								<li class="list-group-item"><i class="ic-folder-open2"></i><a href="{{tutorialGroup.Url}}">{{tutorialGroup.Name}} </a></li>
+							{% end %}
+						</ul>
+					</div>
+				</div>
+				
+				<div class="col-md-10">
+					<div class="tabs-panel" style="margin-left: 20px;">
+						{% for _,section in pairs(AllSection) do %}
+							<div class="tutorial-project">
+								<a name="{{section.Url}}" />
+								<h3 class="project-name">{{section.Name}}</h3>
+								<ul class="clearfix project-list">
+									{% for _,child in pairs(section.Child) do %}
+										{% if child.Hide==false then %}
+											<li class="fl project-list-item-wrap">
+												<a class="clearfix project-list-item" href="{{child.Url}}" title="{{child.Name}}" target="_blank">
+													<div class="fl cover">
+														<img src="{{child.Cover}}" alt="{{child.Name}}" width="64" height="64">
+													</div>
+													<div class="info">
+														<h4 class="single-ellipsis info-title">{{child.Name}}</h4>
+														<p class="double-ellipsis info-des">{{child.Desc}}</p>
+													</div>
+												</a>
+											</li>
+										{% end %}
+									{% end %}					
+								</ul>
+							</div>
+						{% end %}
+					</div>
+				</div>
+			</div>
+		</div>
+
+		{(public/bootstrap.js.html)}
+
+		{(public/nav_hover_show.js.html)}
+
+		{(public/checklogin_show_userinfo_or_login_register.js.html)}
+
+		{(public/baidu.html)}
+
+		{(public/footer.html)}
+	</body>
+</html>

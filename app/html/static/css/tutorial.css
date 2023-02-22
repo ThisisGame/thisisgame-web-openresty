@@ -1,0 +1,190 @@
+.markdown-body table th,
+.markdown-body table td {
+  padding: 6px 5px;
+  border: 1px solid #ddd;
+}
+
+
+
+.editormd-preview-container code, .editormd-html-preview code {
+  border: 1px solid #ddd;
+  background: #f6f6f6;
+  padding: 3px;
+  border-radius: 3px;
+  font-size: 13px;
+}
+
+.editormd-preview-container code, .editormd-html-preview code .com {
+  color: gray;
+}
+
+.markdown-toc-list {
+  padding: 0;
+  margin: 0;
+  margin-left: 0.2rem;
+  list-style: none;
+}
+
+.markdown-toc-list ul{
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.markdown-toc-list ul li{
+  margin-left: 0.75rem;
+}
+
+.list-group-item {
+ position:relative;
+ display:block;
+ padding:.1rem 0.4rem;
+ background-color:#F5F5F5;
+ border:none
+}
+
+.card-header {
+    padding: .75rem 0.55rem;
+    margin-bottom: 0;
+    background-color: 
+rgba(0,0,0,.03);
+border-bottom: 1px solid
+    rgba(0,0,0,.125);
+}
+
+a {
+ color:#333;
+ text-decoration:none;
+ background-color:transparent;
+ font-size: 14px;
+}
+
+a:hover {
+ color:#0056b3;
+ text-decoration:none
+}
+
+.page-link {
+ position:relative;
+ display:block;
+ padding:.5rem .75rem;
+ margin-left:-1px;
+ line-height:1.25;
+ color:#666;
+ background-color:#fff;
+ border:1px solid #dee2e6
+}
+
+.ic-folder-open2 {
+    padding-left: 20px;
+    background: url("/static/img/tree2.gif") no-repeat scroll center center;
+}
+
+.ic-folder-download {
+  padding-left: 20px;
+  background: url("/static/img/download_code.jpeg") no-repeat scroll center center;
+}
+
+#navbarSupportedContent a {
+ font-size: 1rem;
+}
+
+/* 屏幕尺寸>1300 */
+@media screen and (min-width: 1300px){
+  
+  /* 左侧章节目录顶部图书名字 */
+  .left-chapter-menu-top-book-name {
+    width: 26rem;
+    position: sticky;
+    top: 20px;
+  }
+
+  /* 左侧章节目录 */
+  #left-chapter-menu{
+    max-height: 90vh;
+    overflow-y: auto;
+    position: sticky;
+    top: 120px;
+  }
+
+  /* 左侧章节目录每一章Card */
+  .left-chapter-menu-card{
+    width: 26rem;
+  }
+
+  /* 左侧广告位div */
+  .left-ad-div{
+    display: none;
+  }
+
+  /* 右侧当前教程多级目录 */
+  .right-tutorial-menu {
+    width: 16rem;
+    position: sticky;
+    top: 20px;
+  }
+
+  /* 右侧章节目录 */
+  #right-chapter-menu{
+    display: none;
+  }
+
+  .editormd-preview-container, .editormd-html-preview {
+    text-align: left;
+    font-size: 13px;
+    line-height: 1.6;
+    padding: 20px;
+    overflow: auto;
+    width: 100%;
+    background-color: #fff;
+  }
+}
+
+/* 屏幕尺寸<1300 */
+@media screen and (max-width: 1300px){
+  /* 左侧章节目录div整体 */
+  .left-chapter-menu-div{
+    display: none;
+  }
+
+  /* 左侧章节目录顶部图书名字 */
+  .left-chapter-menu-top-book-name {
+
+  }
+
+  /* 左侧章节目录 */
+  #left-chapter-menu{
+    display: none;
+  }
+
+  /* 左侧章节目录每一章Card */
+  .left-chapter-menu-card{
+
+  }
+
+  /* 右侧广告位div */
+  .right-ad-div{
+    display: none;
+  }
+
+  /* markdown正文预览 */
+  .editormd-preview-container, .editormd-html-preview {
+    text-align: left;
+    font-size: 13px;
+    line-height: 1.6;
+    padding: 1px;
+    overflow: auto;
+    width: 100%;
+    background-color: #fff;
+  }
+
+  /* 顶部上下翻页 */
+  .top-page-nav{
+    display: none;
+  }
+
+  /* 底部上下翻页 */
+  .bottom-page-nav{
+    padding-top: 1rem;
+  }
+}

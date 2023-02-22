@@ -1,0 +1,454 @@
+{(public/head_1.html)}
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+<link rel="stylesheet" href="/static/editormd/css/editormd.css" />
+<link rel="stylesheet" href="/static/editormd/css/editormd.preview.css" />
+<link rel="stylesheet" href="/static/css/tutorial.css" />
+
+<!-- 章标题等于节标题，说明当前md就是章的md，那在网页标题上就只要显示章的标题，不用重复显示小节标题。 -->
+{% if CurrentSection.title == CurrentChapter.title then %}
+<title>{{CurrentChapter.title}} | {{BookName}} | {{SiteName}}</title>
+{% else %}
+<title>{{CurrentSection.title}} | {{CurrentChapter.title}} | {{BookName}} | {{SiteName}}</title>
+{% end %}
+<meta name="keywords" content="{{TutorialKeyword}}">
+<meta name="description" content="{{TutorialDesc}}">
+{(public/head_2.html)}
+
+<body>
+	<div class="container-fluid">
+
+		{(public/nav.html)}
+
+		<br>
+
+		<!-- 左侧导航与正文分别占 3 7，右边还有3的空白，整个页面在bootstrap中是12，所以左右两边的空白都是3， -->
+		<div class="row">
+			<!--左侧章节导航-->
+			<div class="col-md-3">
+				<!-- 教程名字 -->
+				<div class="card left-chapter-menu-top-book-name">
+					<div class="card-header">
+						{{BookName}}
+					</div>
+				</div>
+				<br>
+
+				<!-- 章节列表  PC浏览器使用 width>1300 -->
+				<!-- 滚动高度设置为100% 的浏览器可视高度 -->
+				<div id="left-chapter-menu" class="pre-scrollable"
+					style="max-height: 90vh;overflow-y: auto;position: sticky;top: 120px;"
+					onmouseover="MouseOver_LeftChapterMenu()" onmouseout="MouseOut_LeftChapterMenu()">
+
+					<!--左侧导航 文章列表-->
+					{% for _,chapter in pairs(Summary) do %}
+					<div class="card left-chapter-menu-card">
+						<div class="card-header">
+							{{chapter.title}}
+						</div>
+						<ul class="list-group list-group-flush">
+							{% for _,section in pairs(chapter.sections) do %}
+							<li class="list-group-item" id="{{section.md}}"><i class="ic-folder-open2"></i><a
+									href="?book={{Book}}&lang={{Language}}&md={{section.md}}">{{section.title}} </a>
+							</li>
+							{% end %}
+						</ul>
+					</div>
+					<br>
+					{% end %}
+				</div>
+			</div>
+
+			<!-- 顶部广告位 手机浏览器使用-->
+			<div class="col-md-2 left-ad-div">
+				<div class="right-tutorial-menu">
+					{% if CodeResourcesDownloadUrl then %}
+					<div class="card">
+						<div class="card-header">
+							代码资源下载
+						</div>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item"><i class="ic-folder-download"></i><a
+									href="{{CodeResourcesDownloadUrl}}" target="_blank">点我下载</a></li>
+						</ul>
+					</div>
+					<br>
+					{% end %}
+
+					{% if GithubRepositoryUrl then %}
+					<div class="card">
+						<div class="card-header">
+							Github
+						</div>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">
+								<i class="ic-folder-open2"></i>
+								<a href="{{GithubRepositoryUrl}}" target="_blank">点赞、收藏、关注</a>
+							</li>
+						</ul>
+					</div>
+					<br>
+					{% end %}
+
+					<!-- 目录 -->
+					<div class="card">
+						<div class="card-header">
+							目录
+						</div>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">
+								<div id="top-custom-toc-container"></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<br>
+			</div>
+
+			<!-- 正文 -->
+			<div class="col-md-7">
+				<!--上下翻篇-->
+				<nav aria-label="Page navigation example" class="top-page-nav">
+					<ul class="pagination justify-content-center">
+						<li class="page-item">
+							<a class="page-link" href="?book={{Book}}&lang={{Language}}&md={{LastSection.md}}">&lt;&lt;
+								{{LastSection.title}} </a>
+						</li>
+
+						<li class="page-item">
+							<a class="page-link"
+								href="?book={{Book}}&lang={{Language}}&md={{NextSection.md}}">{{NextSection.title}}
+								&gt;&gt;</a>
+						</li>
+					</ul>
+				</nav>
+
+				<!-- 标题 -->
+				<div style="padding-left:20px">
+					<h5 style="display:none;"><span><b>{{TutorialTitle}}</b></span></h5>
+
+					{% if ShowParent then %}
+					<p>
+						<a href="{{ParentTutorialUrl}}" style="text-decoration: underline;color: #8e8e8e;">
+							<img src="/static/img/parent.jpg" alt="{{ParentTutorialTitle}}"
+								style="margin-top: -6px;">{{ParentTutorialTitle}}
+						</a>
+					</p>
+					{% end %}
+
+
+				</div>
+
+
+				<!--markdown正文-->
+				<div id="test-editormd-view" style="min-height: 600px;width: 100%;">
+					<textarea style="display:none;" name="test-editormd-markdown-doc">
+{{TutorialContent}}
+				   </textarea>
+				</div>
+
+				<!--上下翻篇-->
+				<nav aria-label="Page navigation example" class="bottom-page-nav">
+					<ul class="pagination justify-content-center">
+						<li class="page-item">
+							<a class="page-link" href="?book={{Book}}&lang={{Language}}&md={{LastSection.md}}">&lt;&lt;
+								{{LastSection.title}} </a>
+						</li>
+
+						<li class="page-item">
+							<a class="page-link"
+								href="?book={{Book}}&lang={{Language}}&md={{NextSection.md}}">{{NextSection.title}}
+								&gt;&gt;</a>
+						</li>
+					</ul>
+				</nav>
+
+				{% if AllowAds then %}
+				<!--底部广告条-->
+				<div id="bottom-ad">
+					<img src="/static/img/bottom-ad.png" class="rounded mx-auto d-block" alt="...">
+				</div>
+				<br>
+				{% end %}
+
+				{% if AllowComments then %}
+				<!--讨论列表-->
+				<div id="div_discuss_list" style="color: #999;">
+					{% for _,tutorialDiscuss in pairs(TutorialDiscussArr) do %}
+					<div style="float:left;width: 5%;margin-left: 20px;">
+						<i class="fa fa-user-circle" style="font-size:36px;"></i>
+					</div>
+
+					<div id="div_discuss_list_content_{{tutorialDiscuss.Id}}" class="border-bottom"
+						style="width: 90%;padding-top: 0px;padding-right: 0px;padding-bottom: 5px;margin-bottom: 10px;padding-left: 0px;min-height: 80px;">
+						<textarea style="display:none;"
+							name="test-editormd-markdown-doc">{{tutorialDiscuss.Content}}</textarea>
+					</div>
+					{% end %}
+				</div>
+
+				<!--评论输入框-->
+				<div style="float:left;width: 5%;margin-left: 20px;color: #999;">
+					<i class="fa fa-user-circle" style="font-size:36px;"></i>
+				</div>
+				<div style="float:left;width: 90%;">
+					<div id="editor_discuss" style="margin-bottom: 0px;">
+						<textarea style="display:none;"></textarea>
+					</div>
+
+					<div class="input-group">
+						<input type="text" id="input_nickname" aria-label="First name" class="form-control"
+							placeholder="昵称(不填则随机)">
+						<input type="text" id="input_email" aria-label="Last name" class="form-control"
+							placeholder="邮箱(填不填无所谓)">
+						<button type="button" id="button_post_discuss" class="btn btn-outline-secondary"
+							style="border-Radius: 0px;">
+							<i class="fa fa fa-paper-plane-o"> </i>
+							提交
+						</button>
+					</div>
+				</div>
+				{% end %}
+
+
+				<!--文章ID-->
+				<p id="p_tutorial_id" style="display: none;">{{TutorialID}}</p>
+			</div>
+
+			<!-- 右侧广告位 -->
+			<div class="col-md-2 right-ad-div">
+				<div class="right-tutorial-menu">
+					{% if CodeResourcesDownloadUrl then %}
+					<div class="card">
+						<div class="card-header">
+							代码资源下载
+						</div>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item"><i class="ic-folder-download"></i><a
+									href="{{CodeResourcesDownloadUrl}}" target="_blank">点我下载</a></li>
+						</ul>
+					</div>
+					<br>
+					{% end %}
+
+					{% if GithubRepositoryUrl then %}
+					<div class="card">
+						<div class="card-header">
+							Github
+						</div>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">
+								<i class="ic-folder-open2"></i>
+								<a href="{{GithubRepositoryUrl}}" target="_blank">点赞、收藏、关注</a>
+							</li>
+						</ul>
+					</div>
+					<br>
+					{% end %}
+
+					<!-- 目录 -->
+					<div class="card">
+						<div class="card-header">
+							目录
+						</div>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">
+								<div id="right-custom-toc-container"></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+
+			<!--底部章节导航 手机浏览器使用 width<1300-->
+			<div class="col-md-3">
+				<!-- 滚动高度设置为100% 的浏览器可视高度 -->
+				<div id="right-chapter-menu"">
+					<!--左侧导航 文章列表-->
+					{% for _,chapter in pairs(Summary) do %}
+					<div class="card left-chapter-menu-card">
+						<div class="card-header">
+							{{chapter.title}}
+						</div>
+						<ul class="list-group list-group-flush">
+							{% for _,section in pairs(chapter.sections) do %}
+							<li class="list-group-item" id="{{section.md}}"><i class="ic-folder-open2"></i>
+								<a href="?book={{Book}}&lang={{Language}}&md={{section.md}}">{{section.title}} </a>
+							</li>
+							{% end %}
+						</ul>
+					</div>
+					<br>
+					{% end %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{(public/footer.html)}
+
+	{(public/bootstrap.js.html)}
+
+	{(public/editormd.js.html)}
+
+	<script type="text/javascript">
+		function getQueryVariable(variable) {
+			var query = window.location.search.substring(1);
+			var vars = query.split("&");
+			for (var i = 0; i < vars.length; i++) {
+				var pair = vars[i].split("=");
+				if (pair[0] == variable) { return pair[1]; }
+			}
+			return (false);
+		}
+
+		$(function () {
+			var tocContainerElement="#right-custom-toc-container"
+			if($(".right-ad-div").css("display")=='none'){
+				tocContainerElement="#top-custom-toc-container"
+			}
+			var testEditormdView = editormd.markdownToHTML("test-editormd-view", {
+				htmlDecode: "style,script,iframe",  // you can filter tags decode
+				emoji: true,
+				taskList: true,
+				tex: true,  // 默认不解析
+				flowChart: true,  // 默认不解析
+				sequenceDiagram: true,  // 默认不解析
+				tocContainer: tocContainerElement,
+				tocDropdown: false
+			});
+			//删除防采集元素
+			var antiCollectorAdTxt = document.getElementById("antiCollectorAdTxt")
+			if (antiCollectorAdTxt) {
+				antiCollectorAdTxt.remove();
+			}
+
+			//左侧章节列表滚动到当前页
+			var elementId = decodeURIComponent(getQueryVariable("md"))
+			console.log("elementId:" + elementId)
+			var li = document.getElementById(elementId);
+			console.log("li:" + li)
+			//https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTo
+			li.scrollIntoView();
+			//左侧章节列表滚动的时候会影响到整个网页，往下滚动了一点，这里给网页滚回去。
+			window.scrollTo(0, 0);
+
+			$('div[id^="div_discuss_list_content_"]').each(function () {
+				var id = $(this).attr("id")
+				editormd.markdownToHTML(id, {
+					htmlDecode: "style,script,iframe",  // you can filter tags decode
+					emoji: true,
+					taskList: true,
+					tex: true,  // 默认不解析
+					flowChart: true,  // 默认不解析
+					sequenceDiagram: true,  // 默认不解析
+				});
+			});
+
+			// $('#myAffix').affix({
+			// 	offset: {
+			// 		top: 100,
+			// 		bottom: function () {
+			// 			return (this.bottom = $('.footer').outerHeight(true))
+			// 		}
+			// 	}
+			// })
+		});
+	</script>
+
+	{(public/nav_hover_show.js.html)}
+
+	{(public/checklogin_show_userinfo_or_login_register.js.html)}
+
+	{(public/baidu.html)}
+
+	<script type="text/javascript">
+		//Ajax post提交数据
+		$("#button_post_discuss").click(function () {
+			var tutorialID = document.getElementById("p_tutorial_id").innerHTML
+			console.log("tutorialID:" + tutorialID)
+
+			var discuss = editor_discuss.getMarkdown()
+			console.log("editor_discuss.getMarkdown:" + discuss)
+
+			var nickname = $("#input_nickname").val();
+			console.log(nickname)
+
+			var email = $("#input_email").val();
+			console.log(email)
+
+			$.post("/tutorial/Post_submitDiscussRequest.html", { "tutorialID": tutorialID, "nickname": nickname, "email": email, "discuss": discuss }, function (result) {
+				console.log(result)
+
+				var resultJson = JSON.parse(result)
+				if (resultJson.error) {
+					alert(resultJson.error)
+					return
+				}
+				else {
+					//返回讨论的id
+					alert(resultJson.discussid)
+
+					//插入到讨论列表中显示
+				}
+			});
+		});
+
+		// var editor_discuss = editormd("editor_discuss", {
+		// 	width  : "100%",
+		// 	height : "400",
+		// 	path   : "/static/editormd/lib/",
+		// 	watch : false,//实时预览
+		// 	autoFocus : false,
+		// 	toolbarIcons : function() {
+		//         // Or return editormd.toolbarModes[name]; // full, simple, mini
+		//         // Using "||" set icons align right.
+		//         return ["undo", "redo", "bold", "quote","italic","del","|","h1","h2","h3","h4","h5","|","list-ul","list-ol", "hr","|", "preview", "watch", "|", "fullscreen","image","code","preformatted-text","code-block","table"]
+		//     },
+		// });
+
+		//设置左侧章节目录滚动条高度,144是指滚动条上面其他的总高度，导航栏+br+书名字+br
+		var scrollHeight = window.innerHeight - 144
+		console.log("scrollHeight:" + scrollHeight)
+		// console.log($('#left-chapter-menu').css("max-height"))
+		$('#left-chapter-menu').css("max-height", scrollHeight);
+
+		//鼠标移动到滚动章节列表才显示滚动条
+		function MouseOver_LeftChapterMenu() {
+			document.getElementById('left-chapter-menu').style.overflowY = 'auto';
+		}
+		function MouseOut_LeftChapterMenu() {
+			document.getElementById('left-chapter-menu').style.overflowY = 'hidden';
+		}
+
+		//检查是否手机访问
+		// function checkBrowser() {
+		// 	var browser = {
+		// 		versions: function () {
+		// 			var u = navigator.userAgent, app = navigator.appVersion;
+		// 			return {
+		// 				//移动终端浏览器版本信息                 
+		// 				trident: u.indexOf('Trident') > -1, //IE内核                 
+		// 				presto: u.indexOf('Presto') > -1, //opera内核                 
+		// 				webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核                 
+		// 				gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核                 
+		// 				mobile: !!u.match(/AppleWebKit.*Mobile.*/) || !!u.match(/AppleWebKit/), //是否为移动终端                 
+		// 				ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端                 
+		// 				android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器                 
+		// 				iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者QQHD浏览器                 
+		// 				iPad: u.indexOf('iPad') > -1, //是否iPad                 
+		// 				webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部             
+		// 			};
+		// 		}(),
+		// 		language: (navigator.browserLanguage || navigator.language).toLowerCase()
+		// 	}
+		// 	if (browser.versions.android || browser.versions.iPhone || browser.versions.iPad) {
+		// 		window.location.href = "http://m.studyofnet.com"
+		// 	}
+		// }
+		// 如果是手机访问，将章节目录移动到后面
+
+	</script>
+</body>
+
+</html>
