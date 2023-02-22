@@ -114,7 +114,7 @@ sudo systemctl start openresty.service
 
 搞定上面的之后，在app目录执行sh启动。
 
-启动之后就能访问首页了，但是子模块的Markdown图书还没有下载好，现在访问不了教程内页。
+启动之后就能访问首页(localhost:8000)了，但是子模块的Markdown图书还没有下载好，现在访问不了教程内页。
 
 
 ### 2. 添加图书
